@@ -10,7 +10,7 @@ import { useUser } from "@clerk/nextjs";
 const OnBoard = () => {
 
 
-    const [currentTab, setCurrentTab] = useState('çandidate');
+    const [currentTab, setCurrentTab] = useState('candidate');
     const [recruiterFormData, setRecruiterFormData] = useState(initialRecruiterFormData);
     const [candidateFormData, setCandidateFormData] = useState(initialCandidateFormData);
 
