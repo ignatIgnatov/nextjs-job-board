@@ -137,3 +137,59 @@ export const initialCandidateFormData = {
     linkedInProfile: '',
     githubProfile: ''
 }
+
+export const postNewJobFormControlls = [
+    {
+        label: 'Company Name',
+        name: 'companyName',
+        placeholder: 'Company name',
+        componentType: 'input',
+        disabled: true
+    },
+    {
+        label: 'Title',
+        name: 'title',
+        placeholder: 'Job Title',
+        componentType: 'input'
+    },
+    {
+        label: 'Type',
+        name: 'type',
+        placeholder: 'Job Type',
+        componentType: 'input'
+    },
+    {
+        label: 'Location',
+        name: 'location',
+        placeholder: 'Job Location',
+        componentType: 'input'
+    },
+    {
+        label: 'Expirience',
+        name: 'expirience',
+        placeholder: 'Expirience',
+        componentType: 'input'
+    },
+    {
+        label: 'Description',
+        name: 'description',
+        placeholder: 'Description',
+        componentType: 'input'
+    },
+    {
+        label: 'Skills',
+        name: 'skills',
+        placeholder: 'Skills',
+        componentType: 'input'
+    },
+]
+
+export const initialPostNewJobFormData = {
+    companyName: '',
+    title: '',
+    type: '',
+    location: '',
+    expirience: '',
+    description: '',
+    skills: ''
+}
