@@ -8,13 +8,12 @@ import { createProfileAction } from "@/actions";
 import { useUser } from "@clerk/nextjs";
 import { createClient } from "@supabase/supabase-js";
 
-// const supabaseUrl = process.env.SUPABASE_URL;
-// const supabaseApiKey = process.env.SUPABASE_API_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseApiKey = process.env.NEXT_PUBLIC_SUPABASE_API_KEY;
 
-const supabaseClient = createClient('https://vsdmckvnxmvftiirgyim.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzZG1ja3ZueG12ZnRpaXJneWltIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTkyOTY2NDgsImV4cCI6MjAzNDg3MjY0OH0.kbTAYL2q3zOZo10mFFwLoDoMK2porv55wx_RgXhFxvI');
+const supabaseClient = createClient(supabaseUrl, supabaseApiKey);
 
 const OnBoard = () => {
-
 
     const [currentTab, setCurrentTab] = useState('candidate');
     const [recruiterFormData, setRecruiterFormData] = useState(initialRecruiterFormData);
