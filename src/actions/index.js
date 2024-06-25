@@ -38,4 +38,10 @@ export const fetchJobsForRecruiterAction = async (id) => {
 }
 
 //fetch all jobs
+export const fetchJobsForCandidateAction = async () => {
+    await connectToDB();
+    const result = await Job.find();
+
+    return JSON.parse(JSON.stringify(result));
+}
 

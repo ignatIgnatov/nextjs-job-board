@@ -40,6 +40,9 @@ You would need the following tools installed before running the project locally:
    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 
+   SUPABASE_URL={YOUR_SUPABASE_URL}
+   SUPABASE_API_KEY={YOUR_SUPABASE_API_KEY}
+
    ```
 7. Start the project:
 

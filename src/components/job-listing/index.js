@@ -32,7 +32,7 @@ const JobsListing = async ({ user, profileInfo, jobList }) => {
                                         jobList && jobList.length > 0 ?
                                             jobList.map(jobItem => profileInfo?.role === 'candidate'
                                                 ?
-                                                <CandidateJobCart />
+                                                <CandidateJobCart jobItem={jobItem} />
                                                 :
                                                 <RecruiterJobCart jobItem={jobItem} />
                                             )
