@@ -10,11 +10,11 @@ const JobIcon = () => {
                 fill="currentColor"
                 className="w-12 h-12 mb-4 text-gray-900"
             >
-                <path
+                {/* <path
                     fillRule="evenodd"
                     d="M9.315 7.584C12.195 3.883 16.695 1.5"
                     clipRule={"evenodd"}
-                ></path>
+                ></path> */}
             </svg>
         </Fragment>
     )

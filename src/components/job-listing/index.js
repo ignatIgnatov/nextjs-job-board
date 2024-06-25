@@ -4,7 +4,7 @@ import CandidateJobCart from "../candidate-job-cart"
 import PostNewJob from "../post-new-job"
 import RecruiterJobCart from "../recruiter-job-cart"
 
-const JobsListing = async ({ user, profileInfo, jobList }) => {
+const JobsListing = async ({ user, profileInfo, jobList, jobApplications }) => {
 
     return (
         <div>
@@ -32,9 +32,17 @@ const JobsListing = async ({ user, profileInfo, jobList }) => {
                                         jobList && jobList.length > 0 ?
                                             jobList.map(jobItem => profileInfo?.role === 'candidate'
                                                 ?
-                                                <CandidateJobCart jobItem={jobItem} />
+                                                <CandidateJobCart
+                                                    profileInfo={profileInfo}
+                                                    jobItem={jobItem}
+                                                    jobApplications={jobApplications}
+                                                />
                                                 :
-                                                <RecruiterJobCart jobItem={jobItem} />
+                                                <RecruiterJobCart
+                                                    profileInfo={profileInfo}
+                                                    jobItem={jobItem}
+                                                    jobApplications={jobApplications}
+                                                />
                                             )
                                             : null
                                     }

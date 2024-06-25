@@ -15,10 +15,24 @@ import {
 import CommonCard from "../common-card"
 import JobIcon from "../job-icon"
 import { Button } from "../ui/button"
+import { createJobApplicationAction } from "@/actions"
 
-const CandidateJobCart = ({ jobItem }) => {
+const CandidateJobCart = ({ jobItem, profileInfo, jobApplications }) => {
 
   const [showJobDetailsDrawer, setShowJobDetailsDrawer] = useState(false);
+
+  const handleJobApply = async () => {
+    await createJobApplicationAction({
+      recruiterUserId: jobItem?.recruiterId,
+      name: profileInfo?.candidateInfo?.name,
+      email: profileInfo?.email,
+      candidateUserId: profileInfo?.userId,
+      status: ["Applied"],
+      jobId: jobItem?._id,
+      jobAppliedData: new Date().toLocaleDateString()
+    }, '/jobs');
+    setShowJobDetailsDrawer(false);
+  }
 
   return (
     <Fragment>
@@ -42,7 +56,13 @@ const CandidateJobCart = ({ jobItem }) => {
                 {jobItem.title}
               </DrawerTitle>
               <div className="flex gap-3">
-                <Button className="flex h-11 items-center justify-center px-5" >Apply</Button>
+                <Button
+                  onClick={handleJobApply}
+                  className="disabled:opacity-65 flex h-11 items-center justify-center px-5"
+                  disabled={
+                    jobApplications.findIndex(item => item.jobId === jobItem?._id) > -1 ? true : false
+                  }
+                >{jobApplications.findIndex(item => item.jobId === jobItem?._id) > -1 ? "Applied" : "Apply"}</Button>
                 <Button
                   onClick={() => setShowJobDetailsDrawer(false)}
                   className="flex h-11 items-center justify-center px-5">Cancel</Button>

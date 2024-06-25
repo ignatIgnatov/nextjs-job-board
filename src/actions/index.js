@@ -1,6 +1,7 @@
 'use server'
 
 import connectToDB from "@/database"
+import Application from "@/models/application";
 import Job from "@/models/job";
 import Profile from "@/models/profile";
 import { revalidatePath } from "next/cache";
@@ -44,4 +45,31 @@ export const fetchJobsForCandidateAction = async () => {
 
     return JSON.parse(JSON.stringify(result));
 }
+
+//create job application
+export const createJobApplicationAction = async (data, pathToValidate) => {
+    await connectToDB();
+    await Application.create(data);
+    revalidatePath(pathToValidate);
+}
+
+//fetch job applications for candidate
+export const fetchJobApplicationsForCandidate = async (candidateId) => {
+    await connectToDB();
+    const result = await Application.find({ candidateUserId: candidateId });
+
+    return JSON.parse(JSON.stringify(result));
+}
+
+//fetch job applications for recruiter
+export const fetchJobApplicationForRecruiter = async (recruiterId) => {
+    await connectToDB();
+    const result = await Application.find({ recruiterUserId: recruiterId });
+
+    return JSON.parse(JSON.stringify(result));
+}
+
+
+//update job application
+
 
