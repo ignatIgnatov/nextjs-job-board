@@ -16,6 +16,7 @@ import CommonCard from "../common-card"
 import JobIcon from "../job-icon"
 import { Button } from "../ui/button"
 import { createJobApplicationAction } from "@/actions"
+import { DialogFooter } from "../ui/dialog"
 
 const CandidateJobCart = ({ jobItem, profileInfo, jobApplications }) => {
 
@@ -77,10 +78,10 @@ const CandidateJobCart = ({ jobItem, profileInfo, jobApplications }) => {
             <h2 className="text-xl font-bold text-white">{jobItem?.type} Time</h2>
           </div>
           <h3 className="text-2xl font-medium text-black mt-3">Expirience: {jobItem?.expirience}</h3>
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-6 flex-wrap">
             {
               jobItem?.skills.split(',').map(skillItem => (
-                <div className="w-[100px] flex justify-center items-center h-[35] bg-black rounded-[4px]">
+                <div className="w-[100px] justify-center items-center h-[35] bg-black rounded-[4px]">
                   <h2 className="text-[13px] font-medium text-white">{skillItem}</h2>
                 </div>
               ))
