@@ -79,6 +79,7 @@ const JobsListing = ({ user, profileInfo, jobList, jobApplications, filterCatego
                                 ?
                                 (
                                     <Menubar>
+                                        <h2 className="font-bold">Search by:</h2>
                                         {
                                             filterMenus.map((filterMenu) => (
                                                 <MenubarMenu>

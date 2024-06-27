@@ -74,7 +74,7 @@ const Header = ({ user, profileInfo }) => {
                         </div>
                     </SheetContent>
                 </Sheet>
-                <Link href={'/'} className='hidden lg:flex mr-6'>
+                <Link href={'/'} className='hidden font-bold text-3xl lg:flex mr-6'>
                     <h3 className='font-extrabold'>JOBSCO</h3>
                 </Link>
                 <nav className='ml-auto hidden lg:flex gap-6'>
