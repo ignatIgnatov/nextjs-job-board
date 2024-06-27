@@ -26,7 +26,7 @@ You would need the following tools installed before running the project locally:
    ```
    npm install
    ```
-5. Create your app in Github/Settings/Developer settings to take your ID and SECRET
+5. Create your app in clerk.com to take your CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY
 6. In .env.local file add the following:
 
    ```
