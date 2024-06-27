@@ -122,4 +122,27 @@ export const createFilterCategoryAction = async () => {
     return JSON.parse(JSON.stringify(result));
 }
 
+//update profile action
+export const updateProfileAction = async (data, pathToValidate) => {
+    await connectToDB();
+
+    const { userId, role, email,
+        isPremiumUser,
+        membershipType,
+        membershipStartDate,
+        membershipEndDate,
+        recruiterInfo,
+        candidateInfo, _id } = data;
+
+    await Profile.findOneAndUpdate(
+        { _id: _id },
+        {
+            userId, role, email, isPremiumUser, membershipType, membershipStartDate, membershipEndDate, recruiterInfo, candidateInfo
+        },
+        { new: true }
+    );
+
+    revalidatePath(pathToValidate);
+}
+
 

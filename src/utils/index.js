@@ -140,6 +140,23 @@ export const initialCandidateFormData = {
     githubProfile: ''
 }
 
+export const initialCandidateAccountFormData = {
+    name: '',
+    currentJobLocation: '',
+    preferedJobLocation: '',
+    currentSalary: '',
+    noticePeriod: '',
+    skills: '',
+    currentCompany: '',
+    previousCompanies: '',
+    totalExpirience: '',
+    college: '',
+    collegeLocation: '',
+    graduatedYear: '',
+    linkedInProfile: '',
+    githubProfile: ''
+}
+
 export const postNewJobFormControlls = [
     {
         label: 'Company Name',
