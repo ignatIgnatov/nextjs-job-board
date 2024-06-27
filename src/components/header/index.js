@@ -81,6 +81,7 @@ const Header = ({ user, profileInfo }) => {
                     {
                         menuItems.map(menuItem => menuItem.show ?
                             <Link
+                                onClick={() => sessionStorage.removeItem('filterParams')}
                                 href={menuItem.path}
                                 className='group inline-flex h-9 w-max items-center rounded-md bg-white px-4 py-2 text-sm font-medium'>
                                 {menuItem.label}

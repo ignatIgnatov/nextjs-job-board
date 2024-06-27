@@ -36,7 +36,7 @@ const OnBoard = () => {
                 cacheControl: '3600',
                 upset: false
             });
-        console.log(data, error);
+      
         if (data) {
             setCandidateFormData({
                 ...candidateFormData,

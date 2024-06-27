@@ -44,13 +44,11 @@ const CandidateList = ({
     const handleUpdateJobStatus = async (getCurrentStatus) => {
         let copyJobApplicants = [...jobApplications];
         const indexOfCurrentJobApplicant = copyJobApplicants.findIndex(item => item.candidateUserId === currentCandidateDetails.userId);
-        console.log(indexOfCurrentJobApplicant);
+        
         const jobApplicantsToUpdate = {
             ...copyJobApplicants[indexOfCurrentJobApplicant],
             status: copyJobApplicants[indexOfCurrentJobApplicant].status.concat(getCurrentStatus)
         }
-
-        console.log(jobApplicantsToUpdate);
 
         await updateJobApplicationAction(jobApplicantsToUpdate, '/jobs')
     }

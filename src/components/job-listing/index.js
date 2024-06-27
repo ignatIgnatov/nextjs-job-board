@@ -1,10 +1,66 @@
 'use client'
 
+import { filterMenuDataArray, formUrlQuery } from "@/utils"
 import CandidateJobCart from "../candidate-job-cart"
 import PostNewJob from "../post-new-job"
 import RecruiterJobCart from "../recruiter-job-cart"
+import { Menubar, MenubarContent, MenubarItem, MenubarMenu, MenubarTrigger } from "../ui/menubar"
+import { Label } from "../ui/label"
+import { useEffect, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 
-const JobsListing = async ({ user, profileInfo, jobList, jobApplications }) => {
+const JobsListing = ({ user, profileInfo, jobList, jobApplications, filterCategories }) => {
+
+    const [filterParams, setFilterParams] = useState({});
+
+    const searchParams = useSearchParams();
+    const router = useRouter();
+
+    const handleFilter = (getSectionId, getCurrentOption) => {
+        let copyFilterParams = { ...filterParams };
+        const indexOfCurrentSection = Object.keys(copyFilterParams).indexOf(getSectionId);
+        if (indexOfCurrentSection === -1) {
+            copyFilterParams = {
+                ...copyFilterParams,
+                [getSectionId]: [getCurrentOption]
+            }
+        } else {
+            const indexOfCurrentOption = copyFilterParams[getSectionId].indexOf(getCurrentOption);
+            if (indexOfCurrentOption === -1) {
+                copyFilterParams[getSectionId].push(getCurrentOption)
+            } else {
+                copyFilterParams[getSectionId].splice(indexOfCurrentOption, 1)
+            }
+        }
+        setFilterParams(copyFilterParams);
+        sessionStorage.setItem('filterParams', JSON.stringify(copyFilterParams))
+    }
+
+    useEffect(() => {
+        setFilterParams(JSON.parse(sessionStorage.getItem('filterParams')));
+    }, []);
+
+    useEffect(() => {
+        if (filterParams && Object.keys(filterParams).length > 0) {
+            let url = '';
+            url = formUrlQuery({
+                params: searchParams.toString(),
+                dataToAdd: filterParams
+            });
+
+            router.push(url, { scroll: false });
+        }
+    }, [filterParams, searchParams]);
+
+    const filterMenus = filterMenuDataArray.map((item) => (
+        {
+            id: item.id,
+            name: item.label,
+            options: [
+                ...new Set(filterCategories.map((listItem) => listItem[item.id]))
+            ]
+        }
+    ))
 
     return (
         <div>
@@ -19,7 +75,42 @@ const JobsListing = async ({ user, profileInfo, jobList, jobApplications }) => {
                     </h1>
                     <div className="flex items-center">
                         {
-                            profileInfo?.role === 'candidate' ? <p>Filter</p> : <PostNewJob user={user} profileInfo={profileInfo} />
+                            profileInfo?.role === 'candidate'
+                                ?
+                                (
+                                    <Menubar>
+                                        {
+                                            filterMenus.map((filterMenu) => (
+                                                <MenubarMenu>
+                                                    <MenubarTrigger>{filterMenu.name}</MenubarTrigger>
+                                                    <MenubarContent>
+                                                        {
+                                                            filterMenu.options.map((option, optionIndex) => (
+                                                                <MenubarItem
+                                                                    key={optionIndex}
+                                                                    className="flex items-center"
+                                                                    onClick={() => handleFilter(filterMenu.id, option)}>
+                                                                    <div className={`h-4 w-4 border rounded border-gray-900 text-indigo-600 ${filterParams
+                                                                        && Object.keys(filterParams).length > 0
+                                                                        && filterParams[filterMenu.id]
+                                                                        && filterParams[filterMenu.id].indexOf(option) > -1
+                                                                        ? "bg-black" : ""
+                                                                        }`} />
+
+
+                                                                    <Label className="ml-3 cursor-pointer text-sm text-gray-600"
+                                                                    >{option}
+                                                                    </Label>
+                                                                </MenubarItem>
+                                                            ))
+                                                        }
+                                                    </MenubarContent>
+                                                </MenubarMenu>
+                                            ))
+                                        }
+                                    </Menubar>
+                                )
+                                : <PostNewJob user={user} profileInfo={profileInfo} />
                         }
                     </div>
                 </div>

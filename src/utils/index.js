@@ -1,3 +1,5 @@
+import queryString from "query-string";
+
 export const recruiterOnBoardFormControls = [
     {
         label: 'Name',
@@ -192,4 +194,48 @@ export const initialPostNewJobFormData = {
     expirience: '',
     description: '',
     skills: ''
+}
+
+export const filterMenuDataArray = [
+    {
+        id: 'companyName',
+        label: 'Company Name'
+    },
+    {
+        id: 'title',
+        label: 'Title'
+    },
+    {
+        id: 'type',
+        label: 'Type'
+    },
+    {
+        id: 'location',
+        label: 'Location'
+    },
+];
+
+
+export const formUrlQuery = ({ params, dataToAdd }) => {
+    let currentUrl = queryString.parse(params);
+
+    if (Object.keys(dataToAdd).length > 0) {
+        Object.keys(dataToAdd).map((key) => {
+            if (dataToAdd[key].length === 0) {
+                delete currentUrl[key];
+            } else {
+                currentUrl[key] = dataToAdd[key].join(",")
+            }
+        })
+    }
+
+    return queryString.stringifyUrl(
+        {
+            url: window.location.pathname,
+            query: currentUrl
+        },
+        {
+            skipNull: true
+        }
+    )
 }

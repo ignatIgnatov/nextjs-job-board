@@ -7,7 +7,6 @@ const CandidateActivity = ({ jobList, jobApplicants }) => {
 
     const uniqueStatusArray = [... new Set(jobApplicants.map(item => item.status).flat(1))]
 
-    console.log(uniqueStatusArray);
     return (
         <div className="mx-auto max-w-7xl">
             <Tabs defaultValue="Applied" className="w-full">
