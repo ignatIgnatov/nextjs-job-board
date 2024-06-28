@@ -5,18 +5,34 @@ import { Button } from "../ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog"
 import CommonForm from "../common-form"
 import { initialPostNewJobFormData, postNewJobFormControlls } from "@/utils"
-import { createJobAction } from "@/actions"
+import { createJobAction } from "@/actions";
+import { useToast } from "../ui/use-toast";
 
-const PostNewJob = ({ profileInfo, user }) => {
+const PostNewJob = ({ profileInfo, user, jobList }) => {
 
     const [showJobDialog, setShowJobDialog] = useState(false);
     const [jobFormData, setJobFormData] = useState({
         ...initialPostNewJobFormData,
         companyName: profileInfo?.recruiterInfo?.companyName
-    })
+    });
+
+    const { toast } = useToast();
 
     const handlePostNewJobBtnValid = () => {
         return Object.keys(jobFormData).every((control) => jobFormData[control].trim() !== '');
+    }
+
+    const handleAddNewJob = () => {
+        if (!profileInfo?.isPremiumUser && jobList.length >= 2) {
+            toast({
+                variant: "destructive",
+                title: "You can post max 2 jobs.",
+                description: "Please opt for premium membership to post more jobs"
+            });
+            return;
+        }
+
+        setShowJobDialog(true);
     }
 
     const handleCreateJob = async () => {
@@ -35,7 +51,9 @@ const PostNewJob = ({ profileInfo, user }) => {
 
     return (
         <div>
-            <Button onClick={() => setShowJobDialog(true)} className="disabled: opacity-60 flex h-11 items-center justify-center px-5">
+            <Button
+                onClick={handleAddNewJob}
+                className="disabled: opacity-60 flex h-11 items-center justify-center px-5">
                 Post a Job
             </Button>
             <Dialog open={showJobDialog} onOpenChange={() => {

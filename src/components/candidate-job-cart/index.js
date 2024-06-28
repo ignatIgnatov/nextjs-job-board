@@ -3,13 +3,10 @@
 import { Fragment, useState } from "react"
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer"
 
 import CommonCard from "../common-card"
@@ -17,12 +14,26 @@ import JobIcon from "../job-icon"
 import { Button } from "../ui/button"
 import { createJobApplicationAction } from "@/actions"
 import { DialogFooter } from "../ui/dialog"
+import { useToast } from "../ui/use-toast"
 
 const CandidateJobCart = ({ jobItem, profileInfo, jobApplications }) => {
 
   const [showJobDetailsDrawer, setShowJobDetailsDrawer] = useState(false);
 
+  const { toast } = useToast();
+
   const handleJobApply = async () => {
+
+    if (!profileInfo?.isPremiumUser && jobApplications.length >= 2) {
+      setShowJobDetailsDrawer(false);
+      toast({
+        variant: "destructive",
+        title: "You can apply max 2 jobs.",
+        description: "Please opt for premium membership to apply more jobs"
+      });
+      return;
+    }
+
     await createJobApplicationAction({
       recruiterUserId: jobItem?.recruiterId,
       name: profileInfo?.candidateInfo?.name,
