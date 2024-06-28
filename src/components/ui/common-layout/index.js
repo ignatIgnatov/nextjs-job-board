@@ -15,7 +15,6 @@ const CommonLayout = async ({ children }) => {
                 profileInfo={profileInfo}
                 user={JSON.parse(JSON.stringify(user))}
             />
-            {/* Header Component */}
 
             {/* Main Content */}
             <main>{children}</main>

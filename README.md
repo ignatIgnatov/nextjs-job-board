@@ -26,8 +26,11 @@ You would need the following tools installed before running the project locally:
    ```
    npm install
    ```
-5. Create your app in clerk.com to take your CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY
-6. In .env.local file add the following:
+5. Create your app in https://clerk.com to take your CLERK_PUBLISHABLE_KEY and CLERK_SECRET_KEY
+
+6. Create your account in https://dashboard.stripe.com to take your Secret Key and Publishable Key
+
+7. In .env.local file add the following:
 
    ```
    DATABASE_URL={YOUR_MONGODB_DATABASE_URL}
@@ -43,12 +46,15 @@ You would need the following tools installed before running the project locally:
    NEXT_PUBLIC_SUPABASE_URL={YOUR_SUPABASE_URL}
    NEXT_PUBLIC_SUPABASE_API_KEY={YOUR_SUPABASE_API_KEY}
 
+   STRIPE_SECRET_KEY={YOUR_STRIPE_SECRET_KEY}
+   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY={YOUR_STRIPE_PUBLISHABLE_KEY}
+
    ```
-7. Start the project:
+8. Start the project:
 
    ```
    npm run dev
    ```
-6. Access the application:
+9. Access the application:
 
    - Go to http://localhost:3000
